@@ -1,35 +1,31 @@
 ---
-- hosts: all
+- name: importing common file
   become: true
-- name: Include dynamic variables
   import_playbook: ../static-assignments/common.yml
 #  import_playbook: ../dynamic-assignments/env-vars.yml
   tags:
     - always
 
-# - hosts: uat-webservers
-# - name: uat-webserver assignment
-#   ansible.builtin.import_playbook: ../static-assignments/uat-webservers.yml
+- name: uat-webserver assignment
+  import_playbook: ../static-assignments/uat-webservers.yml
 
 # -  name: Include dynamic variables
 # -  hosts: all
 # -  import_playbook: ../static-assignments/common.yml
 # -  import_playbook: ../dynamic-assignments/env-vars.yml
 #    tags:
-#      -  always
+#       -  always
 
 
 - name: include env-vars file
-#   import_playbook: ../dynamic-assignments/env-vars.yml
+  import_playbook: ../dynamic-assignments/env-vars.yml
   tags:
      - always
 
-#-  hosts: db
-  name: import db files
-#   import_playbook: ../static-assignment/db.yml
+- name: import db files
+  import_playbook: ../static-assignment/db.yml
 
-#-  hosts: lb
-  name: Loadbalancers assignment
+- name: Loadbalancers assignment
   import_playbook: ../static-assignments/loadbalancers.yml
   when: load_balancer_is_required 
    
