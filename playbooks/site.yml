@@ -23,7 +23,7 @@
      - always
 
 - name: import db files
-  import_playbook: ../static-assignment/db.yml
+  import_playbook: ../static-assignments/db.yml
 
 - name: Loadbalancers assignment
   import_playbook: ../static-assignments/loadbalancers.yml
