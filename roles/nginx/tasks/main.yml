@@ -30,15 +30,16 @@
 # Vhost configuration.
 - import_tasks: vhosts.yml
 
+
+
 - name: set webservers host name in /etc/hosts
   become: yes
-  blockinfile: |
+  ansible.builtin.lineinfile:
     path: /etc/hosts
-    block: |
-      {{ item.ip }} {{ item.name }}
-  loop:
-    - { name:web1, ip:172.31.45.94 }
-    - { name:web2, ip:172.31.44.202 }
+    line: "{{ item.ip }} {{ item.name }}"
+  with_items:
+    - { name: web1, ip: 172.31.45.94 }
+    - { name: web2, ip: 172.31.44.202 }
     
 # Nginx setup.
 - name: Copy nginx configuration in place.
