@@ -44,7 +44,7 @@ pipeline {
 
     stage("Clean up workspace after build") {
           steps {
-            cleanWs
+            cleanWs()
             }
     }
   }
